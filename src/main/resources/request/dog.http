@@ -1,0 +1,30 @@
+###
+POST {{URL}}
+Content-Type: application/json
+
+{
+  "dogName": "Rex",
+  "dogAge": 3,
+  "dogBreed": "LABRADOR",
+  "dogGender": "MALE"
+}
+
+###
+GET {{URL}}
+
+###
+GET {{URL}}/3
+
+###
+PUT {{URL}}/4
+Content-Type: application/json
+
+{
+  "dogName": "Rex updated",
+  "dogAge": 3,
+  "dogBreed": "LABRADOR",
+  "dogGender": "MALE"
+  }
+
+###
+DELETE {{URL}}/3
