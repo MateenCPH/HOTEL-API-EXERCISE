@@ -3,17 +3,25 @@ POST {{URL}}
 Content-Type: application/json
 
 {
-  "dogName": "Rex",
-  "dogAge": 3,
-  "dogBreed": "LABRADOR",
-  "dogGender": "MALE"
+  "hotelName": "postedHotel",
+  "hotelAddress": "postedHotelAddress",
+  "rooms": [
+    {
+      "roomNumber": 123,
+      "roomPrice": 100.0
+    },
+    {
+      "roomNumber": 456,
+      "roomPrice": 200.0
+    }
+  ]
 }
 
 ###
 GET {{URL}}
 
 ###
-GET {{URL}}/3
+GET {{URL}}/2
 
 ###
 PUT {{URL}}/4
