@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,6 +22,10 @@ public class RoomDTO {
         this.hotelId = room.getHotel().getHotelId();
         this.roomNumber = room.getRoomNumber();
         this.roomPrice = room.getRoomPrice();
+    }
+
+    public static List<RoomDTO> toRoomDtoList(List<Room> rooms) {
+        return rooms.stream().map(RoomDTO::new).toList();
     }
 
     public RoomDTO convertToRoomDTO(Room room) {

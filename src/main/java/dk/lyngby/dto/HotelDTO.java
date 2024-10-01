@@ -29,15 +29,6 @@ public class HotelDTO {
         this.rooms = roomDTOs;
     }
 
-    public RoomDTO convertToRoomDTO(Room room) {
-        return new RoomDTO(
-                room.getRoomId(),
-                room.getHotel().getHotelId(),
-                room.getRoomNumber(),
-                room.getRoomPrice()
-        );
-    }
-
     public HotelDTO convertToHotelDTO(Hotel hotel) {
         List<RoomDTO> roomDTOs = hotel.getRooms().stream()
                 .map(this::convertToRoomDTO)
@@ -48,6 +39,15 @@ public class HotelDTO {
                 hotel.getHotelName(),
                 hotel.getHotelAddress(),
                 roomDTOs
+        );
+    }
+
+    public RoomDTO convertToRoomDTO(Room room) {
+        return new RoomDTO(
+                room.getRoomId(),
+                room.getHotel().getHotelId(),
+                room.getRoomNumber(),
+                room.getRoomPrice()
         );
     }
 

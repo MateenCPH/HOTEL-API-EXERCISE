@@ -45,9 +45,6 @@ public class HotelDAO implements IDAO<Hotel> {
             if (hotel.getHotelAddress() != null) {
                 foundHotel.setHotelAddress(hotel.getHotelAddress());
             }
-            if (hotel.getRooms() != null) {
-                foundHotel.setRooms(hotel.getRooms());
-            }
             em.merge(foundHotel);
             em.getTransaction().commit();
             return foundHotel;
@@ -55,10 +52,10 @@ public class HotelDAO implements IDAO<Hotel> {
     }
 
     @Override
-    public void delete(Hotel hotelDTO) {
+    public void delete(Hotel hotelInput) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Hotel hotel = em.find(Hotel.class, hotelDTO.getHotelId());
+            Hotel hotel = em.find(Hotel.class, hotelInput.getHotelId());
             em.remove(hotel);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -97,33 +94,33 @@ public class HotelDAO implements IDAO<Hotel> {
         RoomDAO roomDAO = new RoomDAO(emf);
         List<Room> rooms = new ArrayList<>();
 
-//        // Create Hotel entity
-//        Hotel hotel = Hotel.builder()
-//                .hotelName("Hotel 5")
-//                .hotelAddress("Address 5")
-//                .build();
-//
-//        // Create Room entities and set their corresponding hotel
-//        Room room1 = Room.builder()
-//                .roomNumber(501)
-//                .roomPrice(7000)
-//                .hotel(hotel)  // Set the hotel for the room
-//                .build();
-//
-//        Room room2 = Room.builder()
-//                .roomNumber(502)
-//                .roomPrice(7500)
-//                .hotel(hotel)  // Set the hotel for the room
-//                .build();
-//
-//        // Add rooms to hotel's room list
-//        rooms.add(room1);
-//        rooms.add(room2);
-//
-//        // Set the rooms in the hotel entity
-//        hotel.setRooms(rooms);
-//
-//        // Persist the hotel entity (which will also persist the rooms)
-//        hotelDAO.create(hotel);
+        // Create Hotel entity
+        Hotel hotel = Hotel.builder()
+                .hotelName("Hotel 5")
+                .hotelAddress("Address 5")
+                .build();
+
+        // Create Room entities and set their corresponding hotel
+        Room room1 = Room.builder()
+                .roomNumber(501)
+                .roomPrice(7000)
+                .hotel(hotel)  // Set the hotel for the room
+                .build();
+
+        Room room2 = Room.builder()
+                .roomNumber(502)
+                .roomPrice(7500)
+                .hotel(hotel)  // Set the hotel for the room
+                .build();
+
+        // Add rooms to a list of rooms
+        rooms.add(room1);
+        rooms.add(room2);
+
+        // Set the rooms in the hotel entity
+        hotel.setRooms(rooms);
+
+        // Persist the hotel entity (which will also persist the rooms)
+        hotelDAO.create(hotel);
     }
 }

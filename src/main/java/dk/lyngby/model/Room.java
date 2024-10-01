@@ -21,10 +21,10 @@ public class Room {
     private int roomNumber;
     private double roomPrice;
 
-    public Room convertToRoomEntity(RoomDTO roomDTO, Hotel hotel) {
+    public Room convertToRoomEntity(RoomDTO roomDTO) {
         return Room.builder()
                 .roomId(roomDTO.getRoomId())
-                .hotel(hotel) // Set the hotel entity
+                //.hotel(null) // Set the hotel entity to null
                 .roomNumber(roomDTO.getRoomNumber())
                 .roomPrice(roomDTO.getRoomPrice())
                 .build();

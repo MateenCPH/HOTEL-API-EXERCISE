@@ -1,38 +1,39 @@
 ###
-POST {{URL}}
+POST {{URL}}/hotel
 Content-Type: application/json
 
 {
-  "hotelName": "postedHotel",
-  "hotelAddress": "postedHotelAddress",
+  "hotelName": "lastHotelName",
+  "hotelAddress": "lastHotelAddress",
   "rooms": [
     {
-      "roomNumber": 123,
-      "roomPrice": 100.0
+      "roomNumber": 888,
+      "roomPrice": 888.0
     },
     {
-      "roomNumber": 456,
-      "roomPrice": 200.0
+      "roomNumber": 999,
+      "roomPrice": 999.0
     }
   ]
 }
 
 ###
-GET {{URL}}
+GET {{URL}}/hotel
 
 ###
-GET {{URL}}/2
+GET {{URL}}/hotel/2
 
 ###
-PUT {{URL}}/4
+GET {{URL}}/hotel/2/rooms
+
+###
+PUT {{URL}}/hotel/13
 Content-Type: application/json
 
 {
-  "dogName": "Rex updated",
-  "dogAge": 3,
-  "dogBreed": "LABRADOR",
-  "dogGender": "MALE"
+  "hotelName": "Hotel name updated4",
+  "hotelAddress": "Hotel address updated2"
   }
 
 ###
-DELETE {{URL}}/3
+DELETE {{URL}}/hotel/15

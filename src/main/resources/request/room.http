@@ -1,0 +1,27 @@
+GET {{URL}}/room
+
+###
+GET {{URL}}/room/1
+
+###
+POST {{URL}}/room
+Content-Type: application/json
+
+{
+  "hotelId": 1,
+  "roomNumber": 789,
+  "roomPrice": 789.0
+}
+
+###
+PUT {{URL}}/room/32
+Content-Type: application/json
+
+{
+  "hotelId": 2,
+  "roomNumber": 1234,
+  "roomPrice": 333.0
+}
+
+###
+DELETE {{URL}}/room/32

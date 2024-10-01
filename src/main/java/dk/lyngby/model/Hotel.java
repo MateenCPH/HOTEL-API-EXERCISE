@@ -18,15 +18,15 @@ public class Hotel {
     private Long hotelId;
     private String hotelName;
     private String hotelAddress;
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotel", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Room> rooms;
 
-    public Hotel convertToHotelEntity(HotelDTO hotelDTO, List<Room> rooms) {
+    public Hotel convertToHotelEntity(HotelDTO hotelDTO) {
         return Hotel.builder()
                 .hotelId(hotelDTO.getHotelId())
                 .hotelName(hotelDTO.getHotelName())
                 .hotelAddress(hotelDTO.getHotelAddress())
-                .rooms(rooms)
+                //.rooms(null)
                 .build();
     }
 }

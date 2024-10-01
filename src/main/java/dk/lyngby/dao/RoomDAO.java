@@ -53,10 +53,10 @@ public class RoomDAO implements IDAO<Room> {
     }
 
     @Override
-    public void delete(Room roomDTO) {
+    public void delete(Room roomInput) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Room room = em.find(Room.class, roomDTO.getRoomId());
+            Room room = em.find(Room.class, roomInput.getRoomId());
             em.remove(room);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -89,4 +89,3 @@ public class RoomDAO implements IDAO<Room> {
         return null;
     }
 }
-
