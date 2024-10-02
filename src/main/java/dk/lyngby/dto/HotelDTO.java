@@ -1,6 +1,5 @@
 package dk.lyngby.dto;
 
-import dk.lyngby.model.Dog;
 import dk.lyngby.model.Hotel;
 import dk.lyngby.model.Room;
 import lombok.AllArgsConstructor;
