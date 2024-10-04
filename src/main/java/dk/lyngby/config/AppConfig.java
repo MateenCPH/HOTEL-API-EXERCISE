@@ -1,48 +1,33 @@
 package dk.lyngby.config;
 
 
-import dk.lyngby.controller.ExceptionController;
-import dk.lyngby.exception.ApiException;
 import dk.lyngby.routes.Routes;
-import dk.lyngby.util.ApiProps;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.EntityManagerFactory;
 
-@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class AppConfig
-{
+public class AppConfig {
 
-    private static final Routes routes = new Routes();
-    private static final ExceptionController exceptionController = new ExceptionController();
+    private static Routes routes;
 
-    private static void configuration(JavalinConfig config)
-    {
-        // == Server ==
-        config.router.contextPath = ApiProps.API_CONTEXT;
-
-        // == Plugins ==
-        config.bundledPlugins.enableRouteOverview("/routes"); // Enable route overview
-        config.bundledPlugins.enableDevLogging(); // Enable development logging
-
-        // == Routes ==
+    public static void configuration(JavalinConfig config) {
+        config.router.contextPath = "/api/v1"; // base path for all routes
+        config.showJavalinBanner = false;
+        config.http.defaultContentType = "application/json"; // default content type for requests
         config.router.apiBuilder(routes.getApiRoutes());
+
+        // Plugins
+        config.bundledPlugins.enableRouteOverview("/routes"); // enables route overview at /routes
     }
 
-    // == Exception ==
-
-    public static void exceptionHandler(Javalin app)
-    {
-         app.exception(ApiException.class, exceptionController::apiExceptionHandler);
-
-
-    }
-
-    // == Start server ==
-    public static void startServer()
-    {
+    public static Javalin startServer(int port, EntityManagerFactory emf) {
+        routes = new Routes(emf);
         var app = Javalin.create(AppConfig::configuration);
-        exceptionHandler(app);
-        app.start(ApiProps.PORT);
+        app.start(port);
+        return app;
+    }
+
+    public static void stopServer(Javalin app) {
+        app.stop();
     }
 }

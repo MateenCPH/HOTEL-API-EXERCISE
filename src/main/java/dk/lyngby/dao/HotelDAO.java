@@ -89,26 +89,25 @@ public class HotelDAO implements IDAO<Hotel> {
     }
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("hotel");
         HotelDAO hotelDAO = new HotelDAO(emf);
-        RoomDAO roomDAO = new RoomDAO(emf);
         List<Room> rooms = new ArrayList<>();
 
         // Create Hotel entity
         Hotel hotel = Hotel.builder()
-                .hotelName("Hotel 5")
-                .hotelAddress("Address 5")
+                .hotelName("Hotel 2")
+                .hotelAddress("Address 2")
                 .build();
 
         // Create Room entities and set their corresponding hotel
         Room room1 = Room.builder()
-                .roomNumber(501)
+                .roomNumber(201)
                 .roomPrice(7000)
                 .hotel(hotel)  // Set the hotel for the room
                 .build();
 
         Room room2 = Room.builder()
-                .roomNumber(502)
+                .roomNumber(202)
                 .roomPrice(7500)
                 .hotel(hotel)  // Set the hotel for the room
                 .build();

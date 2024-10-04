@@ -11,9 +11,11 @@ import static io.javalin.apibuilder.ApiBuilder.put;
 
 public class HotelRoutes {
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    private final HotelDAO hotelDAO = new HotelDAO(emf);
-    private final HotelController hotelController = new HotelController(hotelDAO);
+    private final HotelController hotelController;
+
+    public HotelRoutes(EntityManagerFactory emf) {
+        this.hotelController = new HotelController(new HotelDAO(emf));
+    }
 
     public EndpointGroup getHotelRoutes()
     {

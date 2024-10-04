@@ -11,9 +11,11 @@ import static io.javalin.apibuilder.ApiBuilder.delete;
 
 public class RoomRoutes {
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    private final RoomDAO roomDAO = new RoomDAO(emf);
-    private final RoomController roomController = new RoomController(roomDAO);
+    private final RoomController roomController;
+
+    public RoomRoutes(EntityManagerFactory emf) {
+        this.roomController = new RoomController(new RoomDAO(emf));
+    }
 
     public EndpointGroup getRoomRoutes()
     {

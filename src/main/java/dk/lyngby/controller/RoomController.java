@@ -18,6 +18,7 @@ public class RoomController {
 
     private final Logger log = LoggerFactory.getLogger(RoomController.class);
     private final RoomDAO roomDAO;
+    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("hotel");
 
     public RoomController(RoomDAO roomDAO) {
         this.roomDAO = roomDAO;
@@ -41,7 +42,7 @@ public class RoomController {
     }
 
     public void createRoom(Context ctx) {
-        HotelDAO hotelDAO = new HotelDAO(HibernateConfig.getEntityManagerFactory());
+        HotelDAO hotelDAO = new HotelDAO(emf);
 
         RoomDTO roomDTO = ctx.bodyAsClass(RoomDTO.class);
         Room room = new Room().convertToRoomEntity(roomDTO);
@@ -52,7 +53,7 @@ public class RoomController {
     }
 
     public void updateRoom(Context ctx) {
-        HotelDAO hotelDAO = new HotelDAO(HibernateConfig.getEntityManagerFactory());
+        HotelDAO hotelDAO = new HotelDAO(emf);
 
         Long roomId = Long.parseLong(ctx.pathParam("id"));
         RoomDTO roomDTO = ctx.bodyAsClass(RoomDTO.class);
@@ -71,7 +72,7 @@ public class RoomController {
     }
 
     public void deleteRoom(Context ctx) {
-        HotelDAO hotelDAO = new HotelDAO(HibernateConfig.getEntityManagerFactory());
+        HotelDAO hotelDAO = new HotelDAO(emf);
 
         Long id = Long.parseLong(ctx.pathParam("id"));
         Room room = roomDAO.getById(id);
@@ -91,5 +92,4 @@ public class RoomController {
             ctx.status(404).result("Room not found");
         }
     }
-
 }
